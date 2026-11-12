@@ -93,7 +93,7 @@ def play():
 class State:
     """Store the information used by the Budget Tracker website."""
     budget: float
-    transactions: list[final_project.Transaction]
+    transactions: list[Transaction]
     names: list[str]
     money_amounts: list[float]
     percents: list[float]
@@ -115,7 +115,7 @@ def get_remaining_budget(state: State) -> float:
 
 def update_percentages(state: State) -> None:
     """Calculate and save the percentage for each transaction."""
-    state.transactions = final_project.calculate_percents(
+    state.transactions = calculate_percents(
         state.transactions,
         state.budget
     )
@@ -268,7 +268,7 @@ def add_transaction(
             state, "Transaction amounts must be greater than zero."
         )
 
-    transaction = final_project.Transaction(name, amount, 0.0)
+    transaction = Transaction(name, amount, 0.0)
     state.transactions.append(transaction)
     state.names.append(name)
     state.money_amounts.append(amount)
@@ -294,7 +294,7 @@ def calculate_percents(state: State) -> Page:
 
     update_percentages(state)
 
-    if final_project.check_transactions(
+    if check_transactions(
         state.transactions, state.budget
     ) == "Budget exceeded!":
         return too_much_spent(state)
@@ -359,8 +359,8 @@ def test_get_total_spent() -> None:
     state = State(
         100.0,
         [
-            final_project.Transaction("Food", 20.0, 0.0),
-            final_project.Transaction("Gas", 30.0, 0.0)
+            Transaction("Food", 20.0, 0.0),
+            Transaction("Gas", 30.0, 0.0)
         ],
         ["Food", "Gas"],
         [20.0, 30.0],
@@ -374,7 +374,7 @@ def test_get_remaining_budget() -> None:
     """Test that the remaining budget is calculated correctly."""
     state = State(
         100.0,
-        [final_project.Transaction("Food", 25.0, 0.0)],
+        [Transaction("Food", 25.0, 0.0)],
         ["Food"],
         [25.0],
         [0.0],
@@ -388,8 +388,8 @@ def test_update_percentages() -> None:
     state = State(
         100.0,
         [
-            final_project.Transaction("Food", 25.0, 0.0),
-            final_project.Transaction("Gas", 50.0, 0.0)
+            Transaction("Food", 25.0, 0.0),
+            fTransaction("Gas", 50.0, 0.0)
         ],
         ["Food", "Gas"],
         [25.0, 50.0],
@@ -405,29 +405,29 @@ def test_update_percentages() -> None:
 
 
 def test_transaction_calculations() -> None:
-    """Test the transaction functions from final_project.py."""
+    """Test the transaction functions."""
     transactions = [
-        final_project.Transaction("Food", 25.0, 0.0),
-        final_project.Transaction("Gas", 50.0, 0.0)
+        Transaction("Food", 25.0, 0.0),
+        Transaction("Gas", 50.0, 0.0)
     ]
 
-    assert final_project.check_transactions(
+    assert check_transactions(
         transactions, 100.0
     ) == ""
 
-    assert final_project.check_transactions(
+    assert check_transactions(
         transactions, 50.0
     ) == "Budget exceeded!"
 
-    assert final_project.check_transactions(
+    assert check_transactions(
         [], 100.0
     ) == "No Transactions!"
 
-    assert final_project.calculate_percents(
+    assert calculate_percents(
         transactions, 100.0
     ) == [
-        final_project.Transaction("Food", 25.0, 25.0),
-        final_project.Transaction("Gas", 50.0, 50.0)
+        Transaction("Food", 25.0, 25.0),
+        Transaction("Gas", 50.0, 50.0)
     ]
 
 
