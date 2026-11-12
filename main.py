@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 from drafter import *
-import final_project
+import final_project.py
 
 
 @dataclass
