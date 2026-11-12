@@ -117,7 +117,7 @@ def update_percentages(state: State) -> None:
     """Calculate and save the percentage for each transaction."""
     run_list = state.transactions
     run_budget = state.budget
-    calculated_transactions = calculate_percents(run_list)
+    calculated_transactions = calculate_percents(run_list, run_budget)
     state.transactions = calculated_transactions
     state.percents = []
     for transaction in state.transactions:
@@ -283,11 +283,11 @@ def add_transaction(
 def finish_transactions(state: State) -> Page:
     """Finish transaction entry and calculate percentages."""
     state.entry_finished = True
-    return calculate_percents(state)
+    return calculate_percents_2(state)
 
 
 @route
-def calculate_percents(state: State) -> Page:
+def calculate_percents_2(state: State) -> Page:
     """Calculate transaction percentages and choose a result page."""
     if not state.transactions:
         return no_transactions(state)
