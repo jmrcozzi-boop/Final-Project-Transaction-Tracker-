@@ -115,10 +115,7 @@ def get_remaining_budget(state: State) -> float:
 
 def update_percentages(state: State) -> None:
     """Calculate and save the percentage for each transaction."""
-    state.transactions = calculate_percents(
-        state.transactions,
-        state.budget
-    )
+    state.transactions = calculate_percents(state.transactions, state.budget)
     state.percents = []
     for transaction in state.transactions:
         state.percents.append(transaction.percent)
