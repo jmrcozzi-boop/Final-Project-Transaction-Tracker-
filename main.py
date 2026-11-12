@@ -117,7 +117,7 @@ def update_percentages(state: State) -> None:
     """Calculate and save the percentage for each transaction."""
     run_list = state.transactions
     run_budget = state.budget
-    calculated_transactions = calculate_percents(run_list, run_budget)
+    calculated_transactions = calculate_percents(run_list)
     state.transactions = calculated_transactions
     state.percents = []
     for transaction in state.transactions:
