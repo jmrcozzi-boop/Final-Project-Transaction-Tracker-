@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 from drafter import *
+from bakery import assert_equal
 
 @dataclass
 class Transaction:
