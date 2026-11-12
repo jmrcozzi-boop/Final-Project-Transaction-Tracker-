@@ -389,7 +389,7 @@ def test_update_percentages() -> None:
         100.0,
         [
             Transaction("Food", 25.0, 0.0),
-            fTransaction("Gas", 50.0, 0.0)
+            Transaction("Gas", 50.0, 0.0)
         ],
         ["Food", "Gas"],
         [25.0, 50.0],
